@@ -9,11 +9,10 @@ import replicate
 import os
 import json
 import time
+import requests
 
 
 os.environ["REPLICATE_API_TOKEN"] = "r8_dE4v9NTlKMOK35GKuFtMLhu7UiKY8AT3aLdPV"
-m = replicate.models.get("tstramer/midjourney-diffusion")
-version = m.versions.get("436b051ebd8f68d23e83d22de5e198e0995357afef113768c20f0b6fcef23c8b")
 
 app = Flask(__name__)
 
@@ -23,7 +22,7 @@ def index():
         q = request.form.get("question")
         
         body = json.dumps({"version": "db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf", "input": { "prompt": q } })
-        headers = {'Authorization': 'Token r8_dE4v9NTlKMOK35GKuFtMLhu7UiKY8AT3aLdPV','Content-Type': 'application/json'}
+        headers = {'Authorization': 'Token 787f515cb0624813736c11e7fefec66473394f02','Content-Type': 'application/json'}
         output = requests.post('https://api.replicate.com/v1/predictions',data=body,headers=headers)
         time.sleep(10)
         get_url = output.json()['urls']['get']
